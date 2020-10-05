@@ -49,3 +49,5 @@ router.delete('/:artistID', (req, res, next) => {
   };
   res.status(204).json(results);
 });
+
+module.exports = router;
