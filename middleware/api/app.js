@@ -4,7 +4,10 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
 //Add routes here as they are created const routename = require(path);
-
+const artistsRoutes = require('./routes/artists');
+const productsRoutes = require('./routes/products');
+const eventsRoutes = require('./routes/events');
+const usersRoutes = require('./routes/users');
 //use morgan during development
 //parse only integers from get requests and json
 app.use(morgan('dev'));
@@ -17,6 +20,11 @@ app.get("/", function (req, res) {
     message: "Hello, everyone"
   });
 });
+
+app.use('/artists', artistsRoutes);
+app.use('/products', productsRoutes);
+app.use('/events', eventsRoutes);
+app.use('/users', usersRoutes);
 
 app.use((error, req, res, next) => {
   res.status(error.status || 500);
