@@ -10,15 +10,18 @@ Artist document
 Calander document
 {
  _id: objid
- artist_id: <objid>
+ artist_ids: {<objid>}
  datetime: datetime
  venuename: string
  venuenumber: int
  eventlinks: {}
 }
-Comments document
+Users document
 {
-_id: <objid>
- artist_id: <objid>
- comment: "string"
+_id: objid
+username: string
+email: string
+password: string
+role: int
+artistname: string
 }
