@@ -1,0 +1,24 @@
+Artist document
+{
+  _id: <objid>,
+  artistname: "string"
+  artistpicture: "document"
+  artistbio: "string"
+  artistlinks: {"strings" }
+  artistdocs: {documents}
+}
+Calander document
+{
+ _id: objid
+ artist_id: <objid>
+ datetime: datetime
+ venuename: string
+ venuenumber: int
+ eventlinks: {}
+}
+Comments document
+{
+_id: <objid>
+ artist_id: <objid>
+ comment: "string"
+}
