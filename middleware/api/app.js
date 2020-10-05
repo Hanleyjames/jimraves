@@ -12,6 +12,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 //Add routes here for use app.use('/route',routename);
+app.get("/", function (req, res) {
+  res.status(200).json({
+    message: "Hello, everyone"
+  });
+});
 
 app.use((error, req, res, next) => {
   res.status(error.status || 500);
