@@ -13,7 +13,12 @@
     "authentication",
     "mongodb"
   ],
-  "author": "Hanleyjames, Thacheshirecat, Shabbamm, Ahmed",
+  "author": [
+    "Hanleyjames",
+    "Thacheshirecat",
+    "Shabbamm",
+    "Ahmed"
+  ],
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
