@@ -11,4 +11,5 @@ To run the expressjs api, navigate to the middleware folder and run "npm run dev
 From whatever branch you're looking to build, go to the root folder and use the command:
 git subtree push --prefix middleware origin heroku-express-ppe
 This will push any changes to this which will then be picked up by heroku's pipeline to build.
-
+For the React project, go to the root folder and use the following command from the master branch: 
+git subtree push --prefix frontend/raves-react origin test-react-pipeline
