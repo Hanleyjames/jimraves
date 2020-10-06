@@ -5,8 +5,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>
+        <h1 class="glow">
           Raves Entertainment
+        </h1>
+        <p class="glow">
+        Opening soon:
         </p>
       </header>
     </div>
