@@ -12,6 +12,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.glow{
+  text-shadow: 3px 1px #24ff27;
+
+}
+h1{
+  font-size: 6em;
+}
+p{
+  font-size: 3em;
 }
