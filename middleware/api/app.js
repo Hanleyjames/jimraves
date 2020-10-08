@@ -3,6 +3,7 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 //Add routes here as they are created const routename = require(path);
 const artistsRoutes = require('./routes/artists');
