@@ -10,7 +10,7 @@ const productsRoutes = require('./routes/products');
 const eventsRoutes = require('./routes/events');
 const usersRoutes = require('./routes/users');
 
-mongoose.connect(STRING_URL('mongodb+srv://'+process.env.MONGO_USERNAME+process.env.MONGO_PASSWORD+'@jimraves.6iafi.azure.mongodb.net',{dbName: process.env.MONGO_DBNAME}), {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(STRING_URL('mongodb+srv://'+(process.env.MONGO_USERNAME_DEV || process.env.MONGO_USERNAME_HEROKU)+(process.env.MONGO_PASSWORD_DEV || process.env.MONGO_PASSWORD_HEROKU)+'@jimraves.6iafi.azure.mongodb.net',{dbName: process.env.MONGO_DBNAME}), {useNewUrlParser: true, useUnifiedTopology: true});
 //use morgan during development
 //parse only integers from get requests and json
 app.use(morgan('dev'));
