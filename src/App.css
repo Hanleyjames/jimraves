@@ -13,13 +13,54 @@
   align-items: center;
   justify-content: center;
 }
-.glow{
-  text-shadow: 3px 1px #24ff27;
+
+.logo {
+    width: 60%;
+    max-width: 100%;
+    height: auto;
+}
+@media only screen and (min-width: 1024px) {
+    .logo {
+        width: 30%;
+        max-width: 100%;
+        height: auto;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .logo {
+        width: 45%;
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+.glow {
+    -webkit-animation:Glow 7s infinite alternate;
+}
+@keyframes Glow {
+    0% {text-shadow: 3px 1px #94F642;}
+    20% {text-shadow: 3px 1px #00FFFF;}
+    40% {text-shadow: 3px 1px #CC99FF;}
+    60% {text-shadow: 3px 1px #F98309;}
+    80% {text-shadow: 3px 1px #F480F4;}
+    100% {text-shadow: 3px 1px #FCF738;}
+}
+
+.glow1 {
 
 }
-h1{
+.glow2 {
+
+}
+.glow3 {
+
+}
+
+
+
+h1 {
   font-size: 6em;
 }
-p{
+p {
   font-size: 3em;
 }
