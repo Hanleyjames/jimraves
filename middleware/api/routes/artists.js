@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
-//const db = require('dbconnectorlocationpath');
+const mongoose = require('mongoose');
+
+const Artist = require('../models/artist');
 
 router.get('/', (req, res, next) => {
   let results = { //replace with db calls later
@@ -10,7 +12,19 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  let userID = req.body.userID;
+  let artistsname = req.body.artistname;
+  let artistspicture = req.body.artistpicture;
+  let artistsbio = req.body.artistpicture;
+  let artistslinks = req.body.artistlinks;
+  let artistsdocs = req.body.artistdocs;
+  let artist = new Artist({
+    _id: new mongoose.Types.ObjectID(),
+    artistname: artistsname,
+    artistpicture: artistspicture,
+    artistbio: artistsbio,
+    artistlinks: artistslinks,
+    artistdocs: artistsdocs
+  });
   let results = {
     message: "Handling POST request with userID",
     user_id: userID
