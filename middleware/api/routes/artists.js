@@ -25,6 +25,12 @@ router.post('/', (req, res, next) => {
     artistlinks: artistslinks,
     artistdocs: artistsdocs
   });
+  artist
+    .save()
+    .then(result => {
+      console.log(result);
+    })
+    .catch(err => console.log(err));
   let results = {
     message: "Handling POST request with userID",
     user_id: userID
