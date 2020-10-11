@@ -14,11 +14,11 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
   let artistsname = req.body.artistname;
   let artistspicture = req.body.artistpicture;
-  let artistsbio = req.body.artistpicture;
+  let artistsbio = req.body.artistbio;
   let artistslinks = req.body.artistlinks;
   let artistsdocs = req.body.artistdocs;
   let artist = new Artist({
-    _id: new mongoose.Types.ObjectID(),
+    _id: new mongoose.mongo.ObjectID(),
     artistname: artistsname,
     artistpicture: artistspicture,
     artistbio: artistsbio,
@@ -32,10 +32,10 @@ router.post('/', (req, res, next) => {
     })
     .catch(err => console.log(err));
   let results = {
-    message: "Handling POST request with userID",
-    user_id: userID
+    message: "POST request for artist creation",
+    artist: artist
   };
-  res.status(204).json(results);
+  res.status(201).json(results);
 });
 
 router.get('/:artistID', (req, res, next) => {
