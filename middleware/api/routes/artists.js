@@ -29,13 +29,17 @@ router.post('/', (req, res, next) => {
     .save()
     .then(result => {
       console.log(result);
+      res.status(201).json({
+        message: "Artist Creation Successful",
+        createdProduct: result
+      })
     })
-    .catch(err => console.log(err));
-  let results = {
-    message: "POST request for artist creation",
-    artist: artist
-  };
-  res.status(201).json(results);
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
 });
 
 router.get('/:artistID', (req, res, next) => {
