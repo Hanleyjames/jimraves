@@ -5,10 +5,18 @@ const mongoose = require('mongoose');
 const Artist = require('../models/artist');
 
 router.get('/', (req, res, next) => {
-  let results = { //replace with db calls later
-    message: "Handling GET request"
-  };
-  res.status(200).json(results);
+  Artist.find()
+    .exec()
+    .then(docs =>{
+      console.log(docs);
+      res.status(200).json(docs);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      })
+    });
 });
 
 router.post('/', (req, res, next) => {
@@ -79,11 +87,15 @@ router.patch('/:artistID', (req, res, next) => {
 
 router.delete('/:artistID', (req, res, next) => {
   let id = req.params.artistID;
-  let results = {
-    message: "Handling DELETE request with parameters",
-    id: id
-  };
-  res.status(204).json(results);
+  Artist.deleteOne({_id: id})
+    .exec()
+    .then(result => {
+      res.status(200).json(result);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({error: err});
+    });
 });
 
 module.exports = router;
