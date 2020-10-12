@@ -18,7 +18,7 @@ router.post('/', (req, res, next) => {
   let artistslinks = req.body.artistlinks;
   let artistsdocs = req.body.artistdocs;
   let artist = new Artist({
-    _id: new mongoose.mongo.ObjectID(),
+    _id: new mongoose.Types.ObjectId(),
     artistname: artistsname,
     artistpicture: artistspicture,
     artistbio: artistsbio,
@@ -40,11 +40,16 @@ router.post('/', (req, res, next) => {
 
 router.get('/:artistID', (req, res, next) => {
   let id = req.params.artistID;
-  let results = {
-    message: "Handling GET request with parameters",
-    id: id
-  };
-  res.status(200).json(results);
+  Artist.findById(id)
+    .exec()
+    .then(doc => {
+      console.log(doc);
+      res.status(200).json(doc);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({error: err});
+    });
 });
 
 router.patch('/:artistID', (req, res, next) => {
