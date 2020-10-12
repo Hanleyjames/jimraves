@@ -2,16 +2,25 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
+//Import artist model/constructor
 const Artist = require('../models/artist');
 
 router.get('/', (req, res, next) => {
   Artist.find()
+    //Filter mongo fields
+    .select('_id artistname artistpicture artistbio artistlinks artistdocs')
     .exec()
     .then(docs =>{
-      console.log(docs);
+      //Have metadata with the retreived documents
+      const response = {
+        count: docs.length,
+        Artists: docs
+      };
       if(docs.length > 0){
-        res.status(200).json(docs);
+        //Return the response with status of 200 if length of the artists are over 0
+        res.status(200).json(response);
       }else{
+        //Return status 204 and a json response with an explenation
         res.status(204).json({
           message: 'No Artists Available'
         });
@@ -19,6 +28,7 @@ router.get('/', (req, res, next) => {
     })
     .catch(err => {
       console.log(err);
+      //return server error
       res.status(500).json({
         error: err
       })
@@ -26,11 +36,13 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
+  //Parameters from the request body
   let artistsname = req.body.artistname;
   let artistspicture = req.body.artistpicture;
   let artistsbio = req.body.artistbio;
   let artistslinks = req.body.artistlinks;
   let artistsdocs = req.body.artistdocs;
+  //Instantiate new artist object using artist constructor
   let artist = new Artist({
     _id: new mongoose.Types.ObjectId(),
     artistname: artistsname,
@@ -39,15 +51,19 @@ router.post('/', (req, res, next) => {
     artistlinks: artistslinks,
     artistdocs: artistsdocs
   });
+  //Attempt to save the new artist object in the database
   artist
     .save()
     .then(result => {
       console.log(result);
+      //return status code 201 with a json object containing it's results
       res.status(201).json({
         message: "Artist Creation Successful",
-        createdProduct: result
+        createdArtist: result
       })
     })
+    //If the save is unsuccessful, respond with a status code 500 (server error)
+    //and a json object with the error.
     .catch(err => {
       console.log(err);
       res.status(500).json({
@@ -57,20 +73,25 @@ router.post('/', (req, res, next) => {
 });
 
 router.get('/:artistID', (req, res, next) => {
+  //Set id = the parameter
   let id = req.params.artistID;
+  //Call the findByID method on the Artist constructor
   Artist.findById(id)
     .exec()
     .then(doc => {
-      console.log(doc);
+      //If the document exists return the document with status code 200, or
+      // return 404 with a message about the missing document
       if(doc){
         res.status(200).json(doc);
       }else{
         res.status(404).json({
-          message: "Artist object not found",
+          message: "Artist not found",
           id: id
         })
       }
     })
+    //If there is an error in the response, return status code 500 and a json
+    //object of the error
     .catch(err => {
       console.log(err);
       res.status(500).json({error: err});
@@ -78,17 +99,32 @@ router.get('/:artistID', (req, res, next) => {
 });
 
 router.patch('/:artistID', (req, res, next) => {
+  //Get and set the id from the parameters
   let id = req.params.artistID;
-  let artistname = req.body.artistname;
-  let artistpicture = req.body.artistpicture;
-  let artistbio = req.body.artistpicture;
-  let artistlinks = req.body.artistlinks;
-  let artistdocs = req.body.artistdocs;
-  let results = {
-    message: "Handling POST request with parameters",
-    id: id
-  };
-  res.status(201).json(results);
+  //Create an update array
+  let updateOps = {};
+  //for each request body object get its propertyName and its associate value
+  //store them in an array, to only update objects that need to be updates.
+  for(let ops of req.body){
+    updateOps[ops.propName] = ops.value;
+  }
+  //Call the update method on the artist constructure, find the artist by id and
+  //pass the updateOperations array to the update function.
+  Artist.update({_id: id}, { $set: updateOps})
+    .exec()
+    //Return the results with a status code of 200
+    .then(result => {
+      console.log(result);
+      res.status(200).json(result);
+    })
+    //if there's an error return the status code 500 (server error) with a json
+    //object of that error
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      })
+    });
 });
 
 router.delete('/:artistID', (req, res, next) => {

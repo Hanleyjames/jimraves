@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 // Schema types found here https://mongoosejs.com/docs/schematypes.html
 const artistSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectID,
-  artistname: String,
+  artistname: { type: String, required: true},
   artistpicture: mongoose.Schema.Types.Mixed,
   artistbio: String,
   artistlinks: [String],
