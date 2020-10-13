@@ -24,7 +24,7 @@ router.get('/', (req, res, next) => {
             artistdocs: doc.artistdocs,
             request: {
               type: 'GET',
-              artisturl: 'http://localhost:3000/products/' + doc._id
+              artisturl: 'http://'+req.headers.host+'/artists/' + doc._id
             }
           }
         })
@@ -68,11 +68,21 @@ router.post('/', (req, res, next) => {
   artist
     .save()
     .then(result => {
-      console.log(result);
       //return status code 201 with a json object containing it's results
       res.status(201).json({
         message: "Artist Creation Successful",
-        createdArtist: result
+        createdArtist: {
+          _id: result._id,
+          artistname: result.artistname,
+          artistpicture: result.artistpicture,
+          artistbio: result.artistbio,
+          artistlinks: result.artistlinks,
+          artistdocs: result.artistdocs,
+          request: {
+            type: 'GET',
+            artisturl: 'http://'+req.headers.host+'/artists/' + result._id
+          }
+        }
       })
     })
     //If the save is unsuccessful, respond with a status code 500 (server error)
@@ -125,6 +135,7 @@ router.patch('/:artistID', (req, res, next) => {
   //Call the update method on the artist constructure, find the artist by id and
   //pass the updateOperations array to the update function.
   Artist.update({_id: id}, { $set: updateOps})
+    .select('_id artistname artistpicture artistbio artistlinks artistdocs')
     .exec()
     //Return the results with a status code of 200
     .then(result => {
