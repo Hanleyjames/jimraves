@@ -1,15 +1,36 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-
-//Import Event models
 const Event = require('../models/event');
 
 router.get('/', (req, res, next) => {
-  let results = { //replace with db calls later
-    message: "Handling GET request"
-  };
-  res.status(200).json(results);
+  Event.find()
+    .select('_id artist_ids eventdatetime venuename venuephone eventlinks')
+    .exec()
+    .then(docs =>{
+      const response = {
+        count: docs.length,
+        Event: docs.map(doc=>{
+          return{
+            _id: doc._id,
+            artist_ids: doc.artist_ids,
+            eventdatetime: doc.eventdatetime,
+            venuename: doc.venuename,
+            venuephone: doc.venuephone,
+            eventlinks: doc.eventlinks,
+            request: {
+              type: 'GET PATCH',
+              eventurl: 'http://'+req.headers.host+'/events'+doc._id
+            }
+          }
+        })
+      };
+      (docs.length > 0) ? res.status(200).json(response) : res.status(204).json({message: 'No events currently listed'});
+    })
+    .catch( err => {
+      console.log(err);
+      res.status(500).json({error: err});
+    });
 });
 
 router.post('/', (req, res, next) => {
