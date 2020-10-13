@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-//const db = require('dbconnectorlocationpath');
+const mongoose = require('mongoose');
+
 
 router.get('/', (req, res, next) => {
   let results = { //replace with db calls later
@@ -12,13 +13,13 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
   let eventdatetime = req.body.eventdatetime;
   let venuename = req.body.venuename;
-  let venuenumber = req.body.venuephonenumber;
+  let venuephone = req.body.venuephone;
   let eventlinks = req.body.eventlinks;
   let results = {
     message: "Handling POST request with userID",
     eventdatetime: eventdatetime,
     venuename: venuename,
-    venuenumber: venuenumber,
+    venuephone: venuephone,
     eventlinks: eventlinks
   };
   res.status(204).json(results);
