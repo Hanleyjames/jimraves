@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
+//Import Event models
+const Event = require('../models/event');
 
 router.get('/', (req, res, next) => {
   let results = { //replace with db calls later
