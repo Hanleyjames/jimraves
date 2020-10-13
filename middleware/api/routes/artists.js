@@ -29,15 +29,8 @@ router.get('/', (req, res, next) => {
           }
         })
       };
-      if(docs.length > 0){
-        //Return the response with status of 200 if length of the artists are over 0
-        res.status(200).json(response);
-      }else{
-        //Return status 204 and a json response with an explenation
-        res.status(204).json({
-          message: 'No Artists Available'
-        });
-      }
+      //If the document length is greater than 0, respond with 200 and the list of artists, else, reply with a 204 status code.
+      (docs.length > 0) ? res.status(200).json(response) : res.status(204).json({message: 'No artists Available'});
     })
     .catch(err => {
       console.log(err);
@@ -105,14 +98,7 @@ router.get('/:artistID', (req, res, next) => {
     .then(doc => {
       //If the document exists return the document with status code 200, or
       // return 404 with a message about the missing document
-      if(doc){
-        res.status(200).json(doc);
-      }else{
-        res.status(404).json({
-          message: "Artist not found",
-          id: id
-        })
-      }
+      (doc) ? res.status(200).json(doc) : res.status(404).json({message: "Artist not found", id: id});
     })
     //If there is an error in the response, return status code 500 and a json
     //object of the error
@@ -153,9 +139,12 @@ router.patch('/:artistID', (req, res, next) => {
 });
 
 router.delete('/:artistID', (req, res, next) => {
+  //Get and set the id from the request parameters
   let id = req.params.artistID;
+  //call the deleteOne method on the Artist constructor and pass the id in the field
   Artist.deleteOne({_id: id})
     .exec()
+    //If the results are successful return status code 200 or log the error and return status code 500
     .then(result => {
       res.status(200).json(result);
     })
