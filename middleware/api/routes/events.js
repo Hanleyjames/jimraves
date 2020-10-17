@@ -19,7 +19,7 @@ router.get('/', (req, res, next) => {
             venuephone: doc.venuephone,
             eventlinks: doc.eventlinks,
             request: {
-              type: 'GET PATCH',
+              type: 'GET PATCH DELETE',
               eventurl: 'http://'+req.headers.host+'/events'+doc._id
             }
           }
@@ -38,23 +38,50 @@ router.post('/', (req, res, next) => {
   let venuename = req.body.venuename;
   let venuephone = req.body.venuephone;
   let eventlinks = req.body.eventlinks;
-  let results = {
-    message: "Handling POST request with userID",
-    eventdatetime: eventdatetime,
+  let artist_ids = req.body.artist_ids;
+  let event = new Event({
+    _id: new mongoose.Types.ObjectID(),
+    artist_ids: artist_ids,
     venuename: venuename,
     venuephone: venuephone,
-    eventlinks: eventlinks
-  };
-  res.status(204).json(results);
+    eventlinks: eventlinks,
+    eventdatetime: eventdatetime
+  });
+  event
+    .save()
+    .then(result = {
+      res.status(201).json({
+        message: "Event Creation Successful",
+        createdEvent: {
+          _id: result._id,
+          artist_ids: result.artist_ids,
+          venuename: result.venuename,
+          venuephone: result.venuephone,
+          eventlinks: result.eventlinks,
+          eventdatetime: results.eventdatetime
+        }
+      })
+    })
+    .catch(err=>{
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
 });
 
 router.get('/:eventID', (req, res, next) => {
   let id = req.params.eventID;
-  let results = {
-    message: "Handling GET request with parameters",
-    id: id
-  };
-  res.status(200).json(results);
+  Event.findbyId(id)
+    .select('_id artist_ids venuename venuephone eventlinks eventdatetime')
+    .exec()
+    .then(doc => {
+      (doc) ? res.status(200).json(doc) : res.status(404).json({message: "Event not found", event_id: id});
+    })
+    .catch(err =>{
+      console.log(err);
+      res.status(500).json({error: err});
+    });
 });
 
 router.patch('/:eventID', (req, res, next) => {
