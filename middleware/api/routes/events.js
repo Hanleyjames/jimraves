@@ -49,7 +49,7 @@ router.post('/', (req, res, next) => {
   });
   event
     .save()
-    .then(result = {
+    .then(result => {
       res.status(201).json({
         message: "Event Creation Successful",
         createdEvent: {
@@ -86,28 +86,34 @@ router.get('/:eventID', (req, res, next) => {
 
 router.patch('/:eventID', (req, res, next) => {
   let id = req.params.eventID;
-  let eventdatetime = req.body.eventdatetime;
-  let venuename = req.body.venuename;
-  let venuenumber = req.body.venuephonenumber;
-  let eventlinks = req.body.eventlinks;
-  let results = {
-    message: "Handling POST request with parameters",
-    id: id,
-    eventdatetime: eventdatetime,
-    venuename: venuename,
-    venuenumber: venuenumber,
-    eventlinks: eventlinks
-  };
-  res.status(201).json(results);
+  let updateOps = {};
+  for(let ops of req.body){
+    updateOps[ops.propName] = ops.value;
+  }
+  Event.update({_id: id}, { $set: updateOps })
+    .select('_id artist_ids venuename venuephone eventlinks eventdatetime')
+    .exec()
+    .then(result => {
+      console.log(result);
+      res.status(200).json(result);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({error: err});
+    });
 });
 
 router.delete('/:eventID', (req, res, next) => {
   let id = req.params.eventID;
-  let results = {
-    message: "Handling DELETE request with parameters",
-    id: id
-  };
-  res.status(204).json(results);
+  Event.deleteOne({_id: id})
+    .exec()
+    .then(result => {
+      res.status(200).json(result);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({error: err});
+    });
 });
 
 module.exports = router;
