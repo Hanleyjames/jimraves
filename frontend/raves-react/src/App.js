@@ -11,7 +11,6 @@ function App() {
         </p>
       </header>
     </div>
-  );
+   );
 }
-
 export default App;

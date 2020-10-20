@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.icon-hover:hover {
+    cursor: pointer;
+}
+.footer {
+    position: fixed;
+    border-radius: 5px;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    font-family: 'VT323', monospace;
+    color: #67207C;
+    text-align: center;
+    font-size: 5pt;
+    background-image: linear-gradient(to right, #94F642,#00FFFF,#CC99FF,#F480F4);
+}
+
