@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const Event = require('../models/event');
+const Artist = require('../models/artist')
 
 router.get('/', (req, res, next) => {
   Event.find()
@@ -33,6 +34,54 @@ router.get('/', (req, res, next) => {
     });
 });
 
+router.post("/", (req, res, next) => {
+  Artist.findById(req.body.artist_ids)
+    .then(artist => {
+      if (!artist) {
+        return res.status(404).json({
+          message: "Artist not found"
+        });
+      }
+      let eventdatetime = req.body.eventdatetime;
+      let venuename = req.body.venuename;
+      let venuephone = req.body.venuephone;
+      let eventlinks = req.body.eventlinks;
+      let artist_ids = req.body.artist_ids;
+      let event = new Event({
+        _id: new mongoose.Types.ObjectID(),
+        artist_ids: artist_ids,
+        venuename: venuename,
+        venuephone: venuephone,
+        eventlinks: eventlinks,
+        eventdatetime: eventdatetime
+      });
+      return event.save();
+    })
+    .then(result => {
+      console.log(result);
+      res.status(201).json({
+        message: "Order stored",
+        createdOrder: {
+          _id: result._id,
+          artist_ids: result.artist_ids,
+          venuename: result.venuename,
+          venuephone: result.venuephone,
+          eventlinks: result.eventlinks,
+          eventdatetime: result.eventdatetime
+        },
+        request: {
+          type: "GET",
+          url: 'http://'+req.headers.host+'/events'+doc._id
+        }
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
+});
 router.post('/', (req, res, next) => {
   let eventdatetime = req.body.eventdatetime;
   let venuename = req.body.venuename;
@@ -47,6 +96,21 @@ router.post('/', (req, res, next) => {
     eventlinks: eventlinks,
     eventdatetime: eventdatetime
   });
+  Artist.findById(artist_ids)
+    .then(artist =>{
+      if(!artist){
+        return res.status(404).json({
+          message: "Product not found"
+        });
+      }
+      return event.save();
+    })
+    .catch(err =>{
+      res.status(500).json({
+        message: 'Artist not found',
+        error: err
+      });
+    });
   event
     .save()
     .then(result => {
