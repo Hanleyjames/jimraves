@@ -60,7 +60,7 @@ router.post("/", (req, res, next) => {
     .then(result => {
       console.log(result);
       res.status(201).json({
-        message: "Order stored",
+        message: "Artist saved",
         createdOrder: {
           _id: result._id,
           artist_ids: result.artist_ids,
