@@ -6,6 +6,7 @@ const Event = require('../models/event');
 router.get('/', (req, res, next) => {
   Event.find()
     .select('_id artist_ids eventdatetime venuename venuephone eventlinks')
+    .populate('artist_ids', 'artistname artistpicture')
     .exec()
     .then(docs =>{
       const response = {
@@ -74,6 +75,7 @@ router.get('/:eventID', (req, res, next) => {
   let id = req.params.eventID;
   Event.findbyId(id)
     .select('_id artist_ids venuename venuephone eventlinks eventdatetime')
+    .populate('artist_ids', '_id artistname artistpicture')
     .exec()
     .then(doc => {
       (doc) ? res.status(200).json(doc) : res.status(404).json({message: "Event not found", event_id: id});

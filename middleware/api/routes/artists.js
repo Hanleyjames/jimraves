@@ -23,7 +23,7 @@ router.get('/', (req, res, next) => {
             artistlinks: doc.artistlinks,
             artistdocs: doc.artistdocs,
             request: {
-              type: 'GET',
+              type: 'GET',//Write array of Methods GET DELETE PATCH
               artisturl: 'http://'+req.headers.host+'/artists/' + doc._id
             }
           }
