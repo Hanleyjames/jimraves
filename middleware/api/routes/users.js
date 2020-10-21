@@ -1,7 +1,17 @@
 const express = require('express');
 const router = express.Router();
-//const db = require('dbconnectorlocationpath');
+const mongoose = require('mongoose');
+const User = require('../models/user');
 
+router.post('/signup', (req, res, next) => {
+  const user = new User({
+    _id: new mongoose.Types.ObjectID(),
+
+  });
+});
+
+
+/*
 router.get('/', (req, res, next) => {
   let results = { //replace with db calls later
     message: "Handling GET request"
@@ -58,5 +68,5 @@ router.delete('/:userID', (req, res, next) => {
   };
   res.status(204).json(results);
 });
-
+*/
 module.exports = router;
