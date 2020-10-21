@@ -6,7 +6,7 @@ import { faInstagramSquare } from '@fortawesome/free-brands-svg-icons';
 
 
 function goToEmail() {
-    window.location = "https://www.gmail.com"
+    window.location = "mailto:Raves.party@gmail.com"
 }
 function goToFacebook() {
     window.location = "https://www.facebook.com/raves.party"
@@ -18,7 +18,7 @@ function goToInstagram() {
 const Footer = () => (
     <div className="footer">
         <p>
-            <FontAwesomeIcon className="icon-hover" icon={faEnvelope} onClick={goToEmail} /> Raves.party@gmail.com <FontAwesomeIcon className="icon-hover" icon={faFacebook} onClick={goToFacebook} />/raves.party <FontAwesomeIcon className="icon-hover" icon={faInstagramSquare} onClick={goToInstagram}/>/raves.party</p>
+            <FontAwesomeIcon className="icon-hover" icon={faEnvelope} onClick={goToEmail} /> Raves.party@gmail.com <FontAwesomeIcon className="icon-hover" icon={faFacebook} onClick={goToFacebook} /> raves.party <FontAwesomeIcon className="icon-hover" icon={faInstagramSquare} onClick={goToInstagram}/> raves.party</p>
     </div>
 );
 
