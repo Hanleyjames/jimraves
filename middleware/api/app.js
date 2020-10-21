@@ -16,6 +16,7 @@ mongoose.Promise = global.Promise;
 //use morgan during development
 //parse only integers from get requests and json
 app.use(morgan('dev'));
+app.use(express.static('uploads'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 

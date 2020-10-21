@@ -1,6 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, + new Date().toISOString() + file.originalname );
+  },
+});
+
+const upload = multer({
+  storage: storage,
+  limits: {filesize: 1024 * 1024 * 10},
+
+});
 
 //Import artist model
 const Artist = require('../models/artist');
@@ -41,10 +57,11 @@ router.get('/', (req, res, next) => {
     });
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', upload.single('artistpicture'), (req, res, next) => {
   //Parameters from the request body
+  console.log(req.file);
   let artistsname = req.body.artistname;
-  let artistspicture = req.body.artistpicture;
+  let artistspicture = req.file.path;
   let artistsbio = req.body.artistbio;
   let artistslinks = req.body.artistlinks;
   let artistsdocs = req.body.artistdocs;
