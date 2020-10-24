@@ -1,18 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+//Import bcrypt for hasing and salting the password body request
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
 router.post("/signup", (req, res, next) => {
+  //Find the user by the email
   User.find({ email: req.body.email })
     .exec()
     .then(user => {
+      //If the user exists in the database, return a status of 409
       if (user.length >= 1) {
         return res.status(409).json({
           message: "Email in use"
         });
       } else {
+        //hash and salt the password, return status 500 if error or create
+        //a new user object with the hashed password
         bcrypt.hash(req.body.password, 10, (err, hash) => {
           if (err) {
             return res.status(500).json({
@@ -24,6 +29,8 @@ router.post("/signup", (req, res, next) => {
               email: req.body.email,
               password: hash
             });
+            //Call the save method and store the result in the json object or
+            //return a status of 500 with the error.
             user
               .save()
               .then(result => {
@@ -60,62 +67,4 @@ router.delete('/:userId', (req, res, next) => {
 });
 
 
-/*
-router.get('/', (req, res, next) => {
-  let results = { //replace with db calls later
-    message: "Handling GET request"
-  };
-  res.status(200).json(results);
-});
-
-router.post('/', (req, res, next) => {
-  let username = req.body.username;
-  let password = req.body.password;
-  let email = req.body.email;
-  let artistname = req.body.email;
-  let results = {
-    message: "Handling POST request with userID",
-    user_name: username,
-    password: password,
-    email: email,
-    artistname: artistname
-  };
-  res.status(204).json(results);
-});
-
-router.get('/:userID', (req, res, next) => {
-  let id = req.params.userID;
-  let results = {
-    message: "Handling GET request with parameters",
-    id: id
-  };
-  res.status(200).json(results);
-});
-
-router.patch('/:userID', (req, res, next) => {
-  let id = req.params.userID;
-  let username = req.body.username;
-  let password = req.body.password;
-  let email = req.body.email;
-  let artistname = req.body.email;
-  let results = {
-    message: "Handling POST request with parameters",
-    id: id,
-    user_name: username,
-    password: password,
-    email: email,
-    artistname: artistname
-  };
-  res.status(201).json(results);
-});
-
-router.delete('/:userID', (req, res, next) => {
-  let id = req.params.userID;
-  let results = {
-    message: "Handling DELETE request with parameters",
-    id: id
-  };
-  res.status(204).json(results);
-});
-*/
 module.exports = router;
