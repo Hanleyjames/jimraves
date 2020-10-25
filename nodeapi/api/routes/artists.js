@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const multer = require('multer');
+const checkAuth =  require('../middleware/check_auth');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -57,7 +58,7 @@ router.get('/', (req, res, next) => {
     });
 });
 
-router.post('/', upload.single('artistpicture'), (req, res, next) => {
+router.post('/', checkAuth, upload.single('artistpicture'), (req, res, next) => {
   //Parameters from the request body
   console.log(req.file);
   let artistsname = req.body.artistname;
