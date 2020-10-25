@@ -3,6 +3,8 @@ const router = express.Router();
 const mongoose = require('mongoose');
 //Import bcrypt for hasing and salting the password body request
 const bcrypt = require('bcrypt');
+// import jsonwebtoken
+const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 router.post("/signup", (req, res, next) => {
@@ -74,8 +76,17 @@ router.post('/login', (req, res, next) =>{
         //If the results are returned, return the auth message (eventually auth
         // token)
         if(result){
+          const token = jwt.sign({
+            email: user[0].email,
+            userId: user[0]._id
+          }, process.env.JWT_KEY,
+
+            {
+              expiresIn: "1h"
+            });
           return res.status(200).json({
-            message: 'Auth Success'
+            message: 'Auth Success',
+            token: token
           });
         }
         //Else just return a 401 with auth failed
