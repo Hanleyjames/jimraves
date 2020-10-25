@@ -76,6 +76,9 @@ router.post('/login', (req, res, next) =>{
         //If the results are returned, return the auth message (eventually auth
         // token)
         if(result){
+          //const allows the jwt signature to be async, and uses the default
+          //algorithm, pass in the email and user id into the payload, followed
+          //by the secret key fromt he env variables and the expiration.
           const token = jwt.sign({
             email: user[0].email,
             userId: user[0]._id
