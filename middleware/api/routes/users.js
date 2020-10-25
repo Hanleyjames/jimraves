@@ -50,6 +50,48 @@ router.post("/signup", (req, res, next) => {
       }
     });
 });
+
+router.post('/login', (req, res, next) =>{
+  //Find the user by the email in the request body
+  User.find({email: req.body.email})
+    .exec()
+    .then(user => {
+      //If the does not exist (user with the find command becomes an array)
+      //return failed auth
+      if(user.length < 1){
+        return res.status(401).json({
+          message: 'Auth Failed'
+        });
+      }
+      bcrypt.compare(req.body.password, user[0].password, (err, result) =>{
+        //if the password from the request body and the database do not match
+        //return failed auth
+        if(err){
+          return res.status(401).json({
+            message: 'Auth Failed'
+          });
+        }
+        //If the results are returned, return the auth message (eventually auth
+        // token)
+        if(result){
+          return res.status(200).json({
+            message: 'Auth Success'
+          });
+        }
+        //Else just return a 401 with auth failed
+        res.status(401).json({
+          message: 'Auth Failed'
+        });
+      })
+    })
+    .catch( err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
+})
+
 router.delete('/:userId', (req, res, next) => {
   //Get and set the id from the request parameters
   let id = req.params.userId;
