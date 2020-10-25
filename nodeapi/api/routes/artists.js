@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const multer = require('multer');
-const checkAuth =  require('../middleware/check_auth');
+const checkAuth =  require('../middleware/checkauth');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
