@@ -126,7 +126,7 @@ router.get('/:artistID', (req, res, next) => {
     });
 });
 
-router.patch('/:artistID', (req, res, next) => {
+router.patch('/:artistID', checkAuth, (req, res, next) => {
   //Get and set the id from the parameters
   let id = req.params.artistID;
   //Create an update array
@@ -156,7 +156,7 @@ router.patch('/:artistID', (req, res, next) => {
     });
 });
 
-router.delete('/:artistID', (req, res, next) => {
+router.delete('/:artistID', checkAuth, (req, res, next) => {
   //Get and set the id from the request parameters
   let id = req.params.artistID;
   //call the deleteOne method on the Artist constructor and pass the id in the field

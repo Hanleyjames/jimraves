@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const Event = require('../models/event');
+const checkAuth =  require('../middleware/checkauth');
 
 router.get('/', (req, res, next) => {
   Event.find()
@@ -34,7 +35,7 @@ router.get('/', (req, res, next) => {
     });
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', checkAuth, (req, res, next) => {
   let eventdatetime = req.body.eventdatetime;
   let venuename = req.body.venuename;
   let venuephone = req.body.venuephone;
@@ -86,7 +87,7 @@ router.get('/:eventID', (req, res, next) => {
     });
 });
 
-router.patch('/:eventID', (req, res, next) => {
+router.patch('/:eventID', checkAuth, (req, res, next) => {
   let id = req.params.eventID;
   let updateOps = {};
   for(let ops of req.body){
@@ -105,7 +106,7 @@ router.patch('/:eventID', (req, res, next) => {
     });
 });
 
-router.delete('/:eventID', (req, res, next) => {
+router.delete('/:eventID', checkAuth, (req, res, next) => {
   let id = req.params.eventID;
   Event.deleteOne({_id: id})
     .exec()
