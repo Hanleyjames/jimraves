@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 // import jsonwebtoken
 const jwt = require('jsonwebtoken');
+//import user model
 const User = require('../models/user');
 //todo
 
