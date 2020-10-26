@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const multer = require('multer');
 const checkAuth =  require('../middleware/checkauth');
+const ArtistController = require("../controllers/artists");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -22,41 +23,7 @@ const upload = multer({
 //Import artist model
 const Artist = require('../models/artist');
 
-router.get('/', (req, res, next) => {
-  Artist.find()
-    //Filter mongo fields
-    .select('_id artistname artistpicture artistbio artistlinks artistdocs')
-    .exec()
-    .then(docs =>{
-      //This creates a response with metadata for the retreived documents in the collection
-      const response = {
-        count: docs.length,
-        Artists: docs.map(doc =>{
-          return{
-            _id: doc._id,
-            artistname: doc.artistname,
-            artistpicture: doc.artistpicture,
-            artistbio: doc.artistbio,
-            artistlinks: doc.artistlinks,
-            artistdocs: doc.artistdocs,
-            request: {
-              type: 'GET',//Write array of Methods GET DELETE PATCH
-              artisturl: 'http://'+req.headers.host+'/artists/' + doc._id
-            }
-          }
-        })
-      };
-      //If the document length is greater than 0, respond with 200 and the list of artists, else, reply with a 204 status code.
-      (docs.length > 0) ? res.status(200).json(response) : res.status(204).json({message: 'No artists Available'});
-    })
-    .catch(err => {
-      console.log(err);
-      //return server error
-      res.status(500).json({
-        error: err
-      })
-    });
-});
+router.get('/', ArtistController.get_all_artists);
 
 router.post('/', checkAuth, upload.single('artistpicture'), (req, res, next) => {
   //Parameters from the request body
