@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const Event = require('../models/event');
-const Artist = require('../models/artist');
 const checkAuth =  require('../middleware/checkauth');
 const EventController = require('../controllers/events')
 
