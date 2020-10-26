@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const Event = require('../models/event');
+const Artist = require('../models/artist');
 const checkAuth =  require('../middleware/checkauth');
 
 router.get('/', (req, res, next) => {
@@ -41,16 +42,23 @@ router.post('/', checkAuth, (req, res, next) => {
   let venuephone = req.body.venuephone;
   let eventlinks = req.body.eventlinks;
   let artist_ids = req.body.artist_ids;
-  let event = new Event({
-    _id: new mongoose.Types.ObjectID(),
-    artist_ids: artist_ids,
-    venuename: venuename,
-    venuephone: venuephone,
-    eventlinks: eventlinks,
-    eventdatetime: eventdatetime
-  });
-  event
-    .save()
+  Artist.findById(artist_ids)
+    .then(artist => {
+      if (!artist) {
+        return res.status(404).json({
+          message: "Artist not found"
+        });
+      }
+      let event = new Event({
+        _id: new mongoose.Types.ObjectID(),
+        artist_ids: artist_ids,
+        venuename: venuename,
+        venuephone: venuephone,
+        eventlinks: eventlinks,
+        eventdatetime: eventdatetime
+      });
+      return event.save();
+    })
     .then(result => {
       res.status(201).json({
         message: "Event Creation Successful",
@@ -64,7 +72,7 @@ router.post('/', checkAuth, (req, res, next) => {
         }
       })
     })
-    .catch(err=>{
+    .catch(err => {
       console.log(err);
       res.status(500).json({
         error: err
