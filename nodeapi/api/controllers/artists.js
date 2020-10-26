@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
+//Import multer for parting and storing files for artists
 const multer = require('multer');
 const Artist = require('../models/artist');
+//Create storage which takes a destination from the root as uploads and
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './uploads/');
