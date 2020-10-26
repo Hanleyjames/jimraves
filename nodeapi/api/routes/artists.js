@@ -1,27 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const multer = require('multer');
 const checkAuth =  require('../middleware/checkauth');
 const ArtistController = require("../controllers/artists");
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './uploads/');
-  },
-  filename: function (req, file, cb) {
-    cb(null, + new Date().toISOString() + file.originalname );
-  },
-});
-
-const upload = multer({
-  storage: storage,
-  limits: {filesize: 1024 * 1024 * 10},
-
-});
-
-//Import artist model
-const Artist = require('../models/artist');
 
 router.get('/', ArtistController.get_all_artists);
 
