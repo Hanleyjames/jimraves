@@ -13,11 +13,22 @@
   align-items: center;
   justify-content: center;
 }
+.menu-bars {
+  color: #CC99FF;
+  position: fixed;
+  right: 0;
+  margin: 1%;
+  font-size: 24pt;
+}
+.menu-bars:hover {
+  cursor: pointer;
+}
 
 .logo {
     width: 60%;
     max-width: 100%;
     height: auto;
+    margin-top: 5%
 }
 @media only screen and (min-width: 1024px) {
     .logo {
@@ -36,6 +47,7 @@
 
 .glow {
     -webkit-animation:Glow 7s infinite alternate;
+    font-size: 3em;
 }
 @keyframes Glow {
     0% {text-shadow: 3px 1px #94F642;}
@@ -46,21 +58,18 @@
     100% {text-shadow: 3px 1px #FCF738;}
 }
 
-.glow1 {
-
+.grid-item {
+  background-color: white;
+  border-radius: 10%;
+  border: 5px solid green;
+  padding: 25%;
+  margin-bottom: 25%;
 }
-.glow2 {
-
+.event-image {
+  width: 75%;
+  height: auto;
 }
-.glow3 {
-
-}
-
-
 
 h1 {
   font-size: 6em;
-}
-p {
-  font-size: 3em;
 }
