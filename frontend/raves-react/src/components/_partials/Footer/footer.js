@@ -6,7 +6,7 @@ import { faInstagramSquare } from '@fortawesome/free-brands-svg-icons';
 
 
 function goToEmail() {
-    window.location = "mailto:Raves.party@gmail.com"
+    window.location = "mailto:ravesentertainmentllc@gmail.com"
 }
 function goToFacebook() {
     window.location = "https://www.facebook.com/raves.party"
