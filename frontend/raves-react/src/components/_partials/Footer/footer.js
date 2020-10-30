@@ -17,8 +17,9 @@ function goToInstagram() {
 
 const Footer = () => (
     <div className="footer">
-        <p>
-            <FontAwesomeIcon className="icon-hover" icon={faEnvelope} onClick={goToEmail} /> ravesentertainmentllc@gmail.com <FontAwesomeIcon className="icon-hover" icon={faFacebook} onClick={goToFacebook} /> raves.party <FontAwesomeIcon className="icon-hover" icon={faInstagramSquare} onClick={goToInstagram}/> raves.party</p>
+      <p>
+        <FontAwesomeIcon className="icon-hover" icon={faEnvelope} onClick={goToEmail} /> | <FontAwesomeIcon className="icon-hover" icon={faFacebook} onClick={goToFacebook} /> | <FontAwesomeIcon className="icon-hover" icon={faInstagramSquare} onClick={goToInstagram}/>
+      </p>
     </div>
 );
 

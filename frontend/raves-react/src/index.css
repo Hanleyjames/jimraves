@@ -20,10 +20,8 @@ code {
     bottom: 0;
     width: 100%;
     height: auto;
-    font-family: 'VT323', monospace;
     color: #67207C;
     text-align: center;
-    font-size: 5pt;
+    font-size: 14pt;
     background-image: linear-gradient(to right, #94F642,#00FFFF,#CC99FF,#F480F4);
 }
-
