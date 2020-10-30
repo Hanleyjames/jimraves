@@ -1,5 +1,5 @@
-# jimraves
-This project is for a client who is looking to run their merch store and display artist under their brand.
+# http://www.raves.party
+This project is for a client who is looking to run their merch store and display artist under their co-op.
 
 ## Roadmap
 V1: Our MVP is a landing page with a semi-complete express js api
