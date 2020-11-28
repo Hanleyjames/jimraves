@@ -8,7 +8,7 @@ export class ArtistList extends React.component{
   }
   render(){
     return(
-      <section><p>Component Works</p></section>
+      <section><p>ArtistList.js works!</p></section>
     )
   }
 };
