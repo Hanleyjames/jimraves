@@ -14,18 +14,22 @@ exports.create_user = (req, res, next) => {
     .then(user => {
       //If the user exists in the database, return a status of 409
       if (user.length >= 1) {
+        console.log("Email in use");
         return res.status(409).json({
           message: "Email in use"
         });
       } else {
         //hash and salt the password, return status 500 if error or create
         //a new user object with the hashed password
+        console.log("Begin Hashing");
         bcrypt.hash(req.body.password, 10, (err, hash) => {
           if (err) {
+            console.log("Error hasing");
             return res.status(500).json({
               error: err
             });
           } else {
+            console.log("Create new user stage");
             const user = new User({
               _id: new mongoose.Types.ObjectId(),
               email: req.body.email,
@@ -42,6 +46,7 @@ exports.create_user = (req, res, next) => {
                 });
               })
               .catch(err => {
+                console.log("Error creating user");
                 console.log(err);
                 res.status(500).json({
                   error: err
