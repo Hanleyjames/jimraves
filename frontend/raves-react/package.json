@@ -22,8 +22,9 @@
     "react-scripts": "^3.4.4",
     "react-validation": "^3.0.7",
     "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
-    "validator": "^13.1.17"
+    "validator": "^13.5.1"
   },
   "scripts": {
     "start": "node server.js",
