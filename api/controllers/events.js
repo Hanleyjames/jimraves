@@ -47,7 +47,7 @@ exports.create_new_event = (req, res, next) => {
         });
       }
       let event = new Event({
-        _id: new mongoose.Types.ObjectID(),
+        _id: new mongoose.Types.ObjectId(),
         artist_ids: artist_ids,
         venuename: venuename,
         venuephone: venuephone,
@@ -65,7 +65,7 @@ exports.create_new_event = (req, res, next) => {
           venuename: result.venuename,
           venuephone: result.venuephone,
           eventlinks: result.eventlinks,
-          eventdatetime: results.eventdatetime
+          eventdatetime: result.eventdatetime
         }
       })
     })

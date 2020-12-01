@@ -3,6 +3,7 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 require('dotenv').config();
 //Add routes here as they are created const routename = require(path);
 const artistsRoutes = require('./routes/artists');
@@ -15,6 +16,7 @@ mongoose.Promise = global.Promise;
 
 //use morgan during development
 //parse only integers from get requests and json
+app.use(cors());
 app.use(morgan('dev'));
 app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.urlencoded({extended: false}));
