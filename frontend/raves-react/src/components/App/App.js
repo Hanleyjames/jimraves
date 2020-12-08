@@ -1,62 +1,88 @@
-import React from 'react';
+import {React, useState, useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {Router, Switch, Route, Link} from "react-router-dom";
+
 import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import Login from "./../Login/Login";
+import Register from "./../Registration/Register";
+import Home from "./../Home/Home";
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import "bootstrap/dist/css/bootstrap.min.css";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    paper: {
-      padding: '10%',
-      borderRadius: 40,
-      backgroundColor: 'white',
-      border: '5px solid #FF6EC7',
-      marginBottom: '45%',
-    },
-  }),
-);
+import { logout } from "./../../actions/auth";
+import { clearMessage } from "./../../actions/message";
+import { history } from "./../../helpers/history";
 
-export default function App() {
-  const classes = useStyles();
+const App = () => {
+  const { token: currentUser } = useSelector((state) => state.token);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    history.listen((location) => {
+      dispatch(clearMessage()); // clear message when changing location
+    });
+  }, [dispatch]);
+
+  const logOut =()=>{
+    dispatch(logout());
+  };
 
   return (
-    <div className="App">
-    <div className="menu-bars">
-    <FontAwesomeIcon icon={faBars} />
+  <Router history={history}>
+    <div>
+      <nav className="navbar navbar-expand navbar-dark bg-dark">
+        <Link to={"/"} className="navbar-brand">
+          Raves Entertainment
+        </Link>
+        <div className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <Link to={"/home"} className="nav-link">
+              Home
+            </Link>
+          </li>
+        </div>
+
+        {currentUser ? (
+          <div className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <a href="/login" className="nav-link" onClick={logOut}>
+                LogOut
+              </a>
+            </li>
+          </div>
+        ) : (
+          <div className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <Link to={"/login"} className="nav-link">
+                Login
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link to={"/register"} className="nav-link">
+                Sign Up
+              </Link>
+            </li>
+          </div>
+        )}
+      </nav>
+
+      <div className="container mt-3">
+        <Switch>
+          <Route exact path={["/", "/home"]} component={Home} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
+        </Switch>
+      </div>
     </div>
-      <header className="App-header">
-
-        <img src="hat-purple.png" alt="Raves Entertainment" className="logo"></img>
-        <p className="glow">Helping music and art thrive</p>
-        <p className="glow">
-            Opening soon...
-        </p>
-        <Container>
-          <Grid container spacing={1}>
-            <Grid item xs={5}>
-              <Paper className={classes.paper}>
-                <h3>LOGO LOGO LOGO</h3>
-                <p>Nullswift</p>
-                Switftnull
-              </Paper>
-            </Grid>
-
-            <Grid item xs={2}></Grid>
-
-            <Grid item xs={5}>
-              <Paper className={classes.paper}>
-                <h2>THE BIG SHOW</h2>
-                <img  className="event-image" src="important.png"></img>
-                <p>Rerekt</p>
-              </Paper>
-            </Grid>
-          </Grid>
-        </Container>
-      </header>
-    </div>
-   );
-}
+  </Router>
+);
+};
+export default App;

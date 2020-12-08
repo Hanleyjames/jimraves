@@ -4,15 +4,15 @@ const API_URL = "http://localhost:3000/users/";
 const register = (email, password) => {
   return axios.post(API_URL + "signup", {
     email,
-    password
+    password,
   });
 };
 
-const login =  (username, password) => {
+const login =  (email, password) => {
   return axios
     .post(API_URL + "login", {
       email,
-      password
+      password,
     })
     .then((response) => {
       if(response.data.token){
