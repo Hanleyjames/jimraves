@@ -21,7 +21,7 @@ import { clearMessage } from "./../../actions/message";
 import { history } from "./../../helpers/history";
 
 const App = () => {
-  const { token: currentUser } = useSelector((state) => state.token);
+  const { user: token } = useSelector((state) => console.log(state) + state.token);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const App = () => {
           </li>
         </div>
 
-        {currentUser ? (
+        {token ? (
           <div className="navbar-nav ml-auto">
             <li className="nav-item">
               <a href="/login" className="nav-link" onClick={logOut}>
