@@ -4,17 +4,17 @@ import './index.css';
 import App from './components/App/App';
 import Footer from './components/_partials/Footer/footer';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from "react-router-dom";
 import store from './store';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <React.StrictMode>
     <Provider store={store}>
-
-        <App />
-        <Footer />
-      </Provider>
-  </React.StrictMode>,
+      <BrowserRouter>
+          <App />
+      </BrowserRouter>
+      <Footer />
+    </Provider>,
   document.getElementById('root')
 );
 

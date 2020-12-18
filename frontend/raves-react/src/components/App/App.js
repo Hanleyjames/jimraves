@@ -1,45 +1,35 @@
-import React, {useState, useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {Router, Switch, Route, Link} from "react-router-dom";
-
-import './App.css';
+import React, { useState, useEffect } from "react";
+import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
-import Login from "./../Login/Login";
-import Register from "./../Registration/Register";
-import Home from "./../Home/Home";
+import AuthService from "../../services/auth.service";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
+import Login from "../Login/Login";
+import Register from "../../components/Register/Register";
+import Home from "../Home/Home";
 
-import { logout } from "./../../actions/auth";
-import { clearMessage } from "./../../actions/message";
-import { history } from "./../../helpers/history";
 
 const App = () => {
-  const { user: token } = useSelector((state) => console.log(state) + state.token);
-  const dispatch = useDispatch();
+  const [currentUser, setCurrentUser] = useState(undefined);
 
   useEffect(() => {
-    history.listen((location) => {
-      dispatch(clearMessage()); // clear message when changing location
-    });
-  }, [dispatch]);
+    const user = AuthService.getCurrentUser();
 
-  const logOut =()=>{
-    dispatch(logout());
+    if (user) {
+      setCurrentUser(user);
+    }
+  }, []);
+
+  const logOut = () => {
+    AuthService.logout();
   };
 
   return (
-  <Router history={history}>
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <Link to={"/"} className="navbar-brand">
-          Raves Entertainment
+          Raves.party
         </Link>
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
@@ -47,10 +37,24 @@ const App = () => {
               Home
             </Link>
           </li>
+
+
+          {currentUser && (
+            <li className="nav-item">
+              <Link to={"/user"} className="nav-link">
+                User
+              </Link>
+            </li>
+          )}
         </div>
 
-        {token ? (
+        {currentUser ? (
           <div className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <Link to={"/profile"} className="nav-link">
+                Logged In
+              </Link>
+            </li>
             <li className="nav-item">
               <a href="/login" className="nav-link" onClick={logOut}>
                 LogOut
@@ -74,7 +78,7 @@ const App = () => {
         )}
       </nav>
 
-      <div className="container mt-3">
+      <div className="">
         <Switch>
           <Route exact path={["/", "/home"]} component={Home} />
           <Route exact path="/login" component={Login} />
@@ -82,7 +86,7 @@ const App = () => {
         </Switch>
       </div>
     </div>
-  </Router>
-);
+  );
 };
+
 export default App;

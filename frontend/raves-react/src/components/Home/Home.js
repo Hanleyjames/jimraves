@@ -27,9 +27,6 @@ export default function Home() {
 
   return (
     <div className="App">
-    <div className="menu-bars">
-    <FontAwesomeIcon icon={faBars} />
-    </div>
       <header className="App-header">
 
         <img src="hat-purple.png" alt="Raves Entertainment" className="logo"></img>
@@ -37,27 +34,6 @@ export default function Home() {
         <p className="glow">
             Opening soon...
         </p>
-        <Container>
-          <Grid container spacing={1}>
-            <Grid item xs={5}>
-              <Paper className={classes.paper}>
-                <h3>LOGO LOGO LOGO</h3>
-                <p>Nullswift</p>
-                Switftnull
-              </Paper>
-            </Grid>
-
-            <Grid item xs={2}></Grid>
-
-            <Grid item xs={5}>
-              <Paper className={classes.paper}>
-                <h2>THE BIG SHOW</h2>
-                <img  className="event-image" src="important.png"></img>
-                <p>Rerekt</p>
-              </Paper>
-            </Grid>
-          </Grid>
-        </Container>
       </header>
     </div>
    );
