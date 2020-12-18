@@ -1,61 +1,92 @@
-import React from 'react';
-import './App.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
+import React, { useState, useEffect } from "react";
+import { Switch, Route, Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    paper: {
-      padding: '10%',
-      borderRadius: 40,
-      backgroundColor: 'white',
-      border: '5px solid #FF6EC7',
-      marginBottom: '45%',
-    },
-  }),
-);
+import AuthService from "../../services/auth.service";
 
-export default function App() {
-  const classes = useStyles();
+import Login from "../Login/Login";
+import Register from "../../components/Register/Register";
+import Home from "../Home/Home";
+
+
+const App = () => {
+  const [currentUser, setCurrentUser] = useState(undefined);
+
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+
+    if (user) {
+      setCurrentUser(user);
+    }
+  }, []);
+
+  const logOut = () => {
+    AuthService.logout();
+  };
 
   return (
-    <div className="App">
-    <div className="menu-bars">
-    <FontAwesomeIcon icon={faBars} />
+    <div>
+      <nav className="navbar navbar-expand navbar-dark bg-dark">
+        <Link to={"/"} className="navbar-brand">
+          Raves.party
+        </Link>
+        <div className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <Link to={"/home"} className="nav-link">
+              Home
+            </Link>
+          </li>
+
+
+          {currentUser && (
+            <li className="nav-item">
+              <Link to={"/user"} className="nav-link">
+                User
+              </Link>
+            </li>
+          )}
+        </div>
+
+        {currentUser ? (
+          <div className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <Link to={"/profile"} className="nav-link">
+                Logged In
+              </Link>
+            </li>
+            <li className="nav-item">
+              <a href="/login" className="nav-link" onClick={logOut}>
+                LogOut
+              </a>
+            </li>
+          </div>
+        ) : (
+          <div className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <Link to={"/login"} className="nav-link">
+                Login
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link to={"/register"} className="nav-link">
+                Sign Up
+              </Link>
+            </li>
+          </div>
+        )}
+      </nav>
+
+      <div className="">
+        <Switch>
+          <Route exact path={["/", "/home"]} component={Home} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
+        </Switch>
+      </div>
     </div>
-      <header className="App-header">
+  );
+};
 
-        <img src="hat-purple.png" alt="Raves Entertainment" className="logo"></img>
-        <p className="glow">Helping music and art thrive</p>
-        <p className="glow">
-            Opening soon...
-        </p>
-        <Container>
-          <Grid container spacing={1}>
-            <Grid item xs={5}>
-              <Paper className={classes.paper}>
-                <h3>LOGO LOGO LOGO</h3>
-                <p>Nullswift</p>
-                Switftnull
-              </Paper>
-            </Grid>
-
-            <Grid item xs={2}></Grid>
-
-            <Grid item xs={5}>
-              <Paper className={classes.paper}>
-                <h2>THE BIG SHOW</h2>
-                <img  className="event-image" src="important.png"></img>
-                <p>Rerekt</p>
-              </Paper>
-            </Grid>
-          </Grid>
-        </Container>
-      </header>
-    </div>
-   );
-}
+export default App;
