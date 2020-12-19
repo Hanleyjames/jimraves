@@ -8,6 +8,7 @@ import AuthService from "../../services/auth.service";
 import Login from "../Login/Login";
 import Register from "../../components/Register/Register";
 import Home from "../Home/Home";
+import EventsList from "../EventsList/EventsList";
 
 
 const App = () => {
@@ -35,6 +36,11 @@ const App = () => {
           <li className="nav-item">
             <Link to={"/home"} className="nav-link">
               Home
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to={"/events"} className="nav-link">
+              Events
             </Link>
           </li>
 
@@ -83,6 +89,7 @@ const App = () => {
           <Route exact path={["/", "/home"]} component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/events" component={EventsList} />
         </Switch>
       </div>
     </div>
