@@ -9,6 +9,7 @@ import Login from "../Login/Login";
 import Register from "../../components/Register/Register";
 import Home from "../Home/Home";
 import EventsList from "../EventsList/EventsList";
+import AddEvent from "../AddEvent/AddEvent";
 
 
 const App = () => {
@@ -90,6 +91,7 @@ const App = () => {
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/events" component={EventsList} />
+          <Route exact path="/addevent" component={AddEvent} />
         </Switch>
       </div>
     </div>

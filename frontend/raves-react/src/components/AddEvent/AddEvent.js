@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import EventDataService from '../../services/events.service';
 
-export default const AddEvent = () => {
+export const AddEvent = () => {
   const initialEventState = {
     id: null,
     artist_ids: [null],
@@ -15,7 +15,7 @@ export default const AddEvent = () => {
 
   const handleInputChange = (e) => {
     const {name, value} = e.target;
-    setEvent({...event, [name: value]});
+    setEvent({...event, [name]: value});
   };
 
   saveEvent = () => {
@@ -39,7 +39,7 @@ export default const AddEvent = () => {
         setSubmitted(true);
         console.log(response.data);
       })
-      catch.(err => {
+      .catch(err => {
         console.log(err);
       });
   };
@@ -119,5 +119,6 @@ export default const AddEvent = () => {
         </button>
       )}
     </div>
-  );
+  };
+};
 };

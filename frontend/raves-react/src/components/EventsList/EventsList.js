@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 const EventsList = () => {
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [hasErrors, setHasErrors] = useState(false);
 
   useEffect(()=>{
     retrieveEvents();
@@ -14,7 +15,6 @@ const EventsList = () => {
     EventsDataService.getAll()
       .then(response => {
         setEvents(response.data.Event);
-        console.log(response.data.Event);
         setIsLoading(true);
       })
       .catch(err=> {
@@ -31,6 +31,7 @@ const EventsList = () => {
                       </li>
                     ))}
                   </ul>
+                  
                 :
                 <p>Loading Event Data</p> }
 
