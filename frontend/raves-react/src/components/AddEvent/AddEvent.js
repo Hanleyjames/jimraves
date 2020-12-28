@@ -18,7 +18,7 @@ export const AddEvent = () => {
     setEvent({...event, [name]: value});
   };
 
-  saveEvent = () => {
+  const saveEvent = () => {
     var data = {
       artist_ids: [event.artist_ids],
       eventdatetime: event.eventdatetime,
@@ -119,6 +119,5 @@ export const AddEvent = () => {
         </button>
       )}
     </div>
-  };
-};
-};
+  )
+}
