@@ -6,6 +6,14 @@ const EventsList = () => {
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState(false);
+  const isUser = () => {
+    let user = JSON.parse(sessionStorage.getItem('user'));
+    if(user){
+      return true;
+    }else{
+      return false;
+    }
+  };
 
   useEffect(()=>{
     retrieveEvents();
@@ -28,10 +36,11 @@ const EventsList = () => {
                       <li key={event._id}>
                         <p>{event.eventdatetime ? event.eventdatetime : "Event Datetime not found"}</p>
                         <p>{event.venuename}</p>
+                        <p>{isUser ? "simulated delete button":"User is not logged in"}</p>
                       </li>
                     ))}
                   </ul>
-                  
+
                 :
                 <p>Loading Event Data</p> }
 
