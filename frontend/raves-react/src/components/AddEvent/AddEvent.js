@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import EventDataService from '../../services/events.service';
 
-export const AddEvent = () => {
+const AddEvent = () => {
   const initialEventState = {
     id: null,
     artist_ids: [null],
@@ -49,14 +49,14 @@ export const AddEvent = () => {
   };
   return (
     <div className="submit-form">
-      {submitted ? (
+      {submitted ?
         <div>
           <h4>You submitted Successfully!</h4>
           <button className="btn btn-success" onClick={newEvent}>
             Add
           </button>
         </div>
-      ):(
+       :
         <div>
           <div className="form-group">
             <label htmlFor="artist_ids">Artist id</label>
@@ -71,7 +71,7 @@ export const AddEvent = () => {
           <div>
             <div className="form-group">
               <label htmlFor="eventdatetime">Event Date</label>
-              <input type="datetime-local"
+              <input type="date"
                      className="form-control"
                      id="eventdatetime"
                      value={event.eventdatetime}
@@ -110,14 +110,17 @@ export const AddEvent = () => {
                      id="venuephone"
                      value={event.venuephone}
                      onChange={handleInputChange}
-                     name="venuename" />
+                     name="venuephone" />
             </div>
           </div>
         </div>
         <button onClick={saveEvent} className="btn btn-success">
           Submit
         </button>
-      )}
+
+    </div>
+    }
     </div>
   )
-}
+};
+export default AddEvent;
