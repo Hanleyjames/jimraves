@@ -36,7 +36,7 @@ const EventsList = () => {
                       <li key={event._id}>
                         <p>{event.eventdatetime ? event.eventdatetime : "Event Datetime not found"}</p>
                         <p>{event.venuename}</p>
-                        <p>{isUser ? "simulated delete button":"User is not logged in"}</p>
+                        <p>{isUser ? "simulated delete button":"User is not logged in, show nothing"}</p>
                       </li>
                     ))}
                   </ul>
