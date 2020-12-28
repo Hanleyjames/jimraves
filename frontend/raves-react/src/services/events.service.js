@@ -1,4 +1,5 @@
 import http from "./http-common";
+import authHeader from "./auth-header";
 
 const getAll = () => {
   return http.get("/events");
@@ -9,7 +10,7 @@ const getOne = (id) => {
 };
 
 const create = (data) => {
-  return http.post("/events", data);
+  return http.post("/events", data,  {headers: authHeader()});
 };
 
 const update = (id, data) => {
