@@ -18,7 +18,7 @@ const update = (id, data) => {
 };
 
 const remove = (id) => {
-  return http.delete(`/events/${id}`);
+  return http.delete(`/events/${id}`, {headers: authHeader()});
 };
 
 
