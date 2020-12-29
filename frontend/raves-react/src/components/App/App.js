@@ -10,6 +10,7 @@ import Register from "../../components/Register/Register";
 import Home from "../Home/Home";
 import EventsList from "../EventsList/EventsList";
 import AddEvent from "../AddEvent/AddEvent";
+import ArtistList from "../ArtistList/ArtistList"
 
 
 const App = () => {
@@ -48,10 +49,11 @@ const App = () => {
 
           {currentUser && (
             <li className="nav-item">
-              <Link to={"/user"} className="nav-link">
-                User
+              <Link to={"/addevent"} className="nav-link">
+                Add Event
               </Link>
             </li>
+
           )}
         </div>
 
@@ -92,6 +94,7 @@ const App = () => {
           <Route exact path="/register" component={Register} />
           <Route exact path="/events" component={EventsList} />
           <Route exact path="/addevent" component={AddEvent} />
+          <Route exact path="/artists" component={ArtistList} />
         </Switch>
       </div>
     </div>

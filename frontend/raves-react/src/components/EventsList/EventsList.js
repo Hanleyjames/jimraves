@@ -30,7 +30,12 @@ const EventsList = () => {
   };
   const deleteEvent = (id) =>{
     EventsDataService.remove(id)
-      .then(response =>{console.log("Item Removed")})
+      .then(response =>{
+        console.log("Item Removed");
+        setIsLoading(false)
+        setEvents([]);
+        retrieveEvents();;
+      })
       .catch(err => {console.log(err)})
   };
   function handleClick(id) {
