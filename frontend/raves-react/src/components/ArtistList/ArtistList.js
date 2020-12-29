@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 const ArtistList = () => {
   //Set state for hooks
-  const [artists, setArtist] = useState([]);
+  const [artists, setArtists] = useState([]);
   const [isLoaded, setLoaded] = useState(false);
   const [user, setUser] = useState(false);
 
@@ -22,7 +22,7 @@ const ArtistList = () => {
   const retrieveArtists = () =>{
     ArtistsDataService.getAll()
     .then(response => {
-      setArtist(response.data.Artists);
+      setArtists(response.data.Artists);
       setLoaded(true);
     })
     .catch(err=>{
@@ -32,7 +32,14 @@ const ArtistList = () => {
   return(
     <div>
       {isLoaded ?
-        <ul></ul>
+        <ul>
+          {artists && artists.map((artist)=>(
+            <li key={artist._id}>
+              <img src={"localhost:3000/"+artist.artistpicture} />
+              <p>{artist.artistname}</p>
+            </li>
+          ))}
+        </ul>
       :
         <div>Loading</div>}
     </div>
