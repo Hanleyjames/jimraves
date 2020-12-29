@@ -29,6 +29,19 @@ const ArtistList = () => {
       console.log(err)
     })
   };
+  const deleteArtist = (id) => {
+    ArtistsDataService.remove(id)
+      .then(response=>{
+        console.log("Item removed");
+        setLoaded(false);
+        setArtists([]);
+        retrieveArtists();
+      })
+      .catch(err=>{console.log(err)})
+  };
+  function handleDelete(id){
+    return deleteArtist(id);
+  };
   return(
     <div>
       {isLoaded ?
@@ -37,6 +50,7 @@ const ArtistList = () => {
             <li key={artist._id}>
               <img src={"localhost:3000/"+artist.artistpicture} />
               <p>{artist.artistname}</p>
+              {user ? <div><button className="btn btn-danger" onClick={()=> handleDelete(artist._id)}>Delete</button></div> : <div></div>}
             </li>
           ))}
         </ul>
