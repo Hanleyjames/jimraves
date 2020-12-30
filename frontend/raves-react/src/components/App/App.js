@@ -34,7 +34,7 @@ const App = () => {
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <Link to={"/"} className="navbar-brand">
-          Raves.party
+        <img src="raves_logo_blue.png" alt="Raves Entertainment" className="nav-logo"></img>
         </Link>
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
