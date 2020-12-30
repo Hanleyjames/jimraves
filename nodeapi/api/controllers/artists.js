@@ -121,7 +121,7 @@ exports.get_single_artist = (req, res, next) => {
       res.status(500).json({error: err});
     });
 };
-
+/*
 exports.get_single_artist = (req, res, next) => {
   //Get and set the id from the parameters
   let id = req.params.artistID;
@@ -150,7 +150,7 @@ exports.get_single_artist = (req, res, next) => {
         error: err
       })
     });
-}
+}*/
 exports.update_artist = (req, res, next) => {
   //Get and set the id from the parameters
   let id = req.params.artistID;
