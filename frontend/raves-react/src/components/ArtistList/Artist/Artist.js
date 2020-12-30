@@ -32,6 +32,8 @@ const Artist = (props) =>{
     <div>
       <p>{artist.artistname}</p>
       <p>{artist.artistbio}</p>
+      <ul>
+      </ul>
     </div>
   )
 }
