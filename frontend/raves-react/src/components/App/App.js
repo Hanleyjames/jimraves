@@ -11,6 +11,8 @@ import Home from "../Home/Home";
 import EventsList from "../EventsList/EventsList";
 import AddEvent from "../AddEvent/AddEvent";
 import ArtistList from "../ArtistList/ArtistList"
+import Event from "../EventsList/Event/Event";
+import Artists from "../ArtistList/Artist/Artist";
 
 
 const App = () => {
@@ -45,25 +47,32 @@ const App = () => {
               Events
             </Link>
           </li>
+          <li className="nav-item">
+            <Link to={"/artists"} className="nav-link">
+              Artists
+            </Link>
+          </li>
 
 
           {currentUser && (
-            <li className="nav-item">
-              <Link to={"/addevent"} className="nav-link">
-                Add Event
-              </Link>
-            </li>
+            <div>
+              <li className="nav-item">
+                <Link to={"/addevent"} className="nav-link">
+                  Add Event
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to={"/addevent"} className="nav-link">
+                  Add Artist
+                </Link>
+              </li>
+            </div>
 
           )}
         </div>
 
         {currentUser ? (
           <div className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link to={"/profile"} className="nav-link">
-                Logged In
-              </Link>
-            </li>
             <li className="nav-item">
               <a href="/login" className="nav-link" onClick={logOut}>
                 LogOut
@@ -95,6 +104,8 @@ const App = () => {
           <Route exact path="/events" component={EventsList} />
           <Route exact path="/addevent" component={AddEvent} />
           <Route exact path="/artists" component={ArtistList} />
+          <Route exact path="/events/:id" component={Event} />
+          <Route exact path="/artists/:id" component={Artists} />
         </Switch>
       </div>
     </div>

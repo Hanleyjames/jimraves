@@ -47,6 +47,7 @@ const EventsList = () => {
     {isLoaded ?  <ul>
                     {events && events.map((event)=>(
                       <li key={event._id}>
+                        <Link className="btn btn-info" to={`/events/${event._id}`}>Show Event Details</Link>
                         <p>{event.eventdatetime ? event.eventdatetime : "Event Datetime not found"}</p>
                         <p>{event.venuename}</p>
                         <p>{user ? <button className="btn btn-danger" onClick={()=> handleClick(event._id)} >Delete</button>:"User is not logged in, show nothing"}</p>
