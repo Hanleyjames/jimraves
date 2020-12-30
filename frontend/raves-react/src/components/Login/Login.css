@@ -1,0 +1,14 @@
+.card-container{
+  width: 50%;  height: 50%; text-align: center; margin-left:25%;
+}
+.login-root{
+  background-color: black;
+  background-repeat: repeat;
+  background-size: cover;
+  min-height: 100vh;
+}
+.profile-img-card{
+  width: 25%;
+  height: 25%;
+  margin:auto;
+}
