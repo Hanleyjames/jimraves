@@ -79,7 +79,7 @@ exports.create_new_event = (req, res, next) => {
 
 exports.get_single_event = (req, res, next) => {
   let id = req.params.eventID;
-  Event.findbyId(id)
+  Event.findById(id)
     .select('_id artist_ids venuename venuephone eventlinks eventdatetime')
     .populate('artist_ids', '_id artistname artistpicture')
     .exec()
