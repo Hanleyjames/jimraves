@@ -31,11 +31,15 @@ const Event = (props) => {
   console.log(eventId);
   return (
     <div>
+      <h3>Artists:</h3>
       <p>{event.artist_names}</p>
+      <h3>Event name:</h3>
       <p>{event.eventname}</p>
-      <p>{event.eventtime}</p>
-      <p>{event.eventdate}</p>
+      <h3>When?</h3>
+      <p>{event.eventdate} | {event.eventtime}</p>
+      <h3>Where?</h3>
       <p>{event.venuename}</p>
+      <h3>Venue phone number</h3>
       <p>{event.venuephone}</p>
     </div>
   )

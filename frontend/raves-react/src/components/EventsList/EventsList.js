@@ -21,7 +21,7 @@ const EventsList = () => {
   const retrieveEvents = () => {
     EventsDataService.getAll()
       .then(response => {
-        setEvents(response.data.Event);
+        setEvents(response.data.Events);
         setLoaded(true);
       })
       .catch(err=> {
@@ -48,10 +48,12 @@ const EventsList = () => {
                     {events && events.map((event)=>(
                       <li key={event._id}>
                         <Link className="btn btn-info" to={`/events/${event._id}`}>Show Event Details</Link>
+                        <h3>Artists:</h3>
                         <p>{event.artist_names}</p>
+                        <h3>Event name</h3>
                         <p>{event.eventname}</p>
-                        <p>{event.eventdate ? event.eventdate: "Event Datetime not found"}</p>
-                        <p>{event.eventtime}</p>
+                        <h3>Event Date</h3>
+                        <p>{event.eventdate } | {event.eventtime}</p>
                         <p>{user ? <button className="btn btn-danger" onClick={()=> handleClick(event._id)} >Delete</button>:"User is not logged in, show nothing"}</p>
                       </li>
                     ))}
