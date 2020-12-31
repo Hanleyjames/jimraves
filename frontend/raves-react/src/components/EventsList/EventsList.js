@@ -48,8 +48,10 @@ const EventsList = () => {
                     {events && events.map((event)=>(
                       <li key={event._id}>
                         <Link className="btn btn-info" to={`/events/${event._id}`}>Show Event Details</Link>
-                        <p>{event.eventdatetime ? event.eventdatetime : "Event Datetime not found"}</p>
-                        <p>{event.venuename}</p>
+                        <p>{event.artist_names}</p>
+                        <p>{event.eventname}</p>
+                        <p>{event.eventdate ? event.eventdate: "Event Datetime not found"}</p>
+                        <p>{event.eventtime}</p>
                         <p>{user ? <button className="btn btn-danger" onClick={()=> handleClick(event._id)} >Delete</button>:"User is not logged in, show nothing"}</p>
                       </li>
                     ))}

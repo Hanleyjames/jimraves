@@ -4,8 +4,10 @@ import EventDataService from '../../services/events.service';
 const AddEvent = () => {
   const initialEventState = {
     id: null,
-    artist_ids: [null],
-    eventdatetime: Date.now(),
+    artist_names: "",
+    eventname: "",
+    eventdate: Date.now(),
+    eventtime: "",
     eventlinks: [null],
     venuename:"",
     venuephone: ""
@@ -20,8 +22,10 @@ const AddEvent = () => {
 
   const saveEvent = () => {
     var data = {
-      artist_ids: [event.artist_ids],
-      eventdatetime: event.eventdatetime,
+      artist_names: event.artist_names,
+      eventname: event.eventname,
+      eventdate: event.eventdate,
+      eventtime: event.eventtime,
       eventlinks: [event.eventlinks],
       venuename: event.venuename,
       venuephone: event.venuephone
@@ -29,9 +33,11 @@ const AddEvent = () => {
     EventDataService.create(data)
       .then(response => {
         setEvent({
-          id: response.data.id,
-          artist_ids: response.data.artist_ids,
-          eventdatetime: response.data.eventdatetime,
+          _id: response.data.id,
+          artist_names: response.data.artist_names,
+          eventname: response.data.eventname,
+          eventdate: response.data.eventdate,
+          eventtime: response.data.eventtime,
           eventlinks: response.data.eventlinks,
           venuename: response.data.venuename,
           venuephone: response.data.venuephone
@@ -59,18 +65,38 @@ const AddEvent = () => {
        :
         <div>
           <div className="form-group">
-            <label htmlFor="artist_ids">Artist id</label>
+            <label htmlFor="artist_names">Artist names</label>
             <input type="text"
                    className="form-control"
-                   id="artist_ids"
-                   value={event.artist_ids}
+                   id="artist_names"
+                   value={event.artist_names}
                    onChange={handleInputChange}
-                   name="artist_ids" />
+                   name="artist_names" />
+
+          </div>
+          <div className="form-group">
+            <label htmlFor="eventname">Event Name</label>
+            <input type="text"
+                   className="form-control"
+                   id="eventname"
+                   value={event.eventname}
+                   onChange={handleInputChange}
+                   name="eventname" />
+
+          </div>
+          <div className="form-group">
+            <label htmlFor="eventtime">Event time</label>
+            <input type="text"
+                   className="form-control"
+                   id="eventtime"
+                   value={event.eventtime}
+                   onChange={handleInputChange}
+                   name="eventtime" />
 
           </div>
           <div>
             <div className="form-group">
-              <label htmlFor="eventdatetime">Event Date</label>
+              <label htmlFor="eventdate">Event Date</label>
               <input type="date"
                      className="form-control"
                      id="eventdatetime"

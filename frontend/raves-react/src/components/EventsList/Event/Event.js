@@ -31,7 +31,10 @@ const Event = (props) => {
   console.log(eventId);
   return (
     <div>
-      <p>{event.eventdatetime}</p>
+      <p>{event.artist_names}</p>
+      <p>{event.eventname}</p>
+      <p>{event.eventtime}</p>
+      <p>{event.eventdate}</p>
       <p>{event.venuename}</p>
       <p>{event.venuephone}</p>
     </div>
