@@ -21,7 +21,7 @@ const upload = multer({
 exports.get_all_artists = (req, res, next) => {
   Artist.find()
     //Filter mongo fields
-    .select('_id artistname artistpicture artistbio artistlinks artistdocs')
+    .select('_id artistname artistpicture')
     .exec()
     .then(docs =>{
       //This creates a response with metadata for the retreived documents in the collection
@@ -32,9 +32,6 @@ exports.get_all_artists = (req, res, next) => {
             _id: doc._id,
             artistname: doc.artistname,
             artistpicture: doc.artistpicture,
-            artistbio: doc.artistbio,
-            artistlinks: doc.artistlinks,
-            artistdocs: doc.artistdocs,
             request: {
               type: 'GET',//Write array of Methods GET DELETE PATCH
               artisturl: 'http://'+req.headers.host+'/artists/' + doc._id

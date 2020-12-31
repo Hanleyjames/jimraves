@@ -4,11 +4,12 @@ import {Link} from "react-router-dom";
 
 const Event = (props) => {
   const [isLoaded, setLoaded] = useState(false);
-  const [event, setEvent] = useState([]);
+  const [event, setEvent] = useState({});
   const [user, setUser] = useState(false);
   const [eventId] = useState(props.match.params.id);
   useEffect(()=>{
     isUser();
+    retrieveEvent(eventId);
   },[]);
   const isUser = () =>{
     let user = JSON.parse(sessionStorage.getItem('user'));
@@ -16,11 +17,23 @@ const Event = (props) => {
       setUser(true);
     }
   }
+  const retrieveEvent = (id) =>{
+    EventsDataService.getOne(id)
+    .then(response =>{
+      setEvent(response.data);
+      setLoaded(true);
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+  }
 
   console.log(eventId);
   return (
     <div>
-      <p>{props.match.params.id}</p>
+      <p>{event.eventdatetime}</p>
+      <p>{event.venuename}</p>
+      <p>{event.venuephone}</p>
     </div>
   )
 }
