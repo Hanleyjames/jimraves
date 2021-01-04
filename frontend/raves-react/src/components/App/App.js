@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+//proprietary garbage
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+
 
 import AuthService from "../../services/auth.service";
 
@@ -13,6 +17,7 @@ import AddEvent from "../AddEvent/AddEvent";
 import ArtistList from "../ArtistList/ArtistList"
 import Event from "../EventsList/Event/Event";
 import Artists from "../ArtistList/Artist/Artist";
+import PaymentPortal from "../StoreFront/PaymentPortal/PaymentPortal";
 
 
 const App = () => {
@@ -29,8 +34,10 @@ const App = () => {
   const logOut = () => {
     AuthService.logout();
   };
+  const stripePromise = loadStripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
 
   return (
+    <Elements stripe={stripePromise}>
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <Link to={"/"} className="navbar-brand">
@@ -106,9 +113,11 @@ const App = () => {
           <Route exact path="/artists" component={ArtistList} />
           <Route exact path="/events/:id" component={Event} />
           <Route exact path="/artists/:id" component={Artists} />
+          <Route exact path="/paymentsportal" component={PaymentPortal} />
         </Switch>
       </div>
     </div>
+    </Elements>
   );
 };
 
