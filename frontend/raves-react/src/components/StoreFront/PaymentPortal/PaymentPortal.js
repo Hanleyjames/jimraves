@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from "react";
 import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
+import "./PaymentPortal.css";
+
 const PaymentPortal = (props) => {
   const stripe = useStripe();
   const elements = useElements();
-
+    
   const handleSubmit = async (event) => {
     // Block native form submission.
     event.preventDefault();
@@ -31,14 +33,67 @@ const PaymentPortal = (props) => {
       console.log('[PaymentMethod]', paymentMethod);
     }
   };
-
+  
+  //<span style ={{fontSize: 30}} className = "badge badge-primary m-2">{this.formatCount()}</span>
   return (
-    <form onSubmit={handleSubmit}>
-      <CardElement />
-      <button type="submit" disabled={!stripe}>
-        Pay
-      </button>
-    </form>
+    
+    <div class="text-white">
+      <form onSubmit={handleSubmit}>
+      
+      <div class="container min-vh-100">
+        <div class="row"> 
+          <div class="col-sm">
+            <div class = "card">
+              <h1 style ={{fontSize: 30}}><b>Please Enter Your Payment Information</b></h1>
+              <p>Thank You!</p>
+       
+            </div>
+          </div>
+        <div class="col-sm">
+       
+          <input
+            type = "text"
+            placeHolder = "Full Name"
+            name = "full name"
+            required/>
+
+            <input
+            type = "text"
+            placeHolder = "Phone Number"
+            name = "phone number"
+            required />
+            
+            <input
+            type = "text"
+            placeHolder = "Email"
+            name = "email"
+            required />
+
+            <input
+            type = "text"
+            placeHolder = "Address"
+            name = "address"
+            required />
+
+            <CardElement
+              options={{
+                style: {
+                  base: {
+                      fontSize: '20px',
+                  }
+                }
+              }
+            }
+            />
+       <button style = {{fontSize: 20, frontWeight: "bold"}} className = "btn btn-primary" type="submit" disabled={!stripe}>
+        Submit
+        </button>
+
+          </div>
+        </div>
+     </div>
+   </form>
+  </div>
   );
 }
 export default PaymentPortal;
