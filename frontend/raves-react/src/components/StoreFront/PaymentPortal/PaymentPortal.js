@@ -82,6 +82,7 @@ const PaymentPortal = (props) => {
             <CardElement
               options={{
                 style: {
+                  margin: '10px',
                   base: {
                       fontSize: '20px',
                   }
