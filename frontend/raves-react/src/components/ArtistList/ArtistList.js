@@ -49,7 +49,7 @@ const ArtistList = () => {
           {artists && artists.map((artist)=>(
             <li key={artist._id}>
               <Link to={"artists/"+artist._id}>
-                <img src={"localhost:3000/"+artist.artistpicture} />
+                <img src={"localhost:3001/"+artist.artistpicture} />
                 <p>{artist.artistname}</p>
               </Link>
               {user ? <div><button className="btn btn-danger" onClick={()=> handleDelete(artist._id)}>Delete</button></div> : <div></div>}
