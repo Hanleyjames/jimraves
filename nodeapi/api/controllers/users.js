@@ -33,7 +33,8 @@ exports.create_user = (req, res, next) => {
             const user = new User({
               _id: new mongoose.Types.ObjectId(),
               email: req.body.email,
-              password: hash
+              password: hash,
+              auth: 0
             });
             //Call the save method and store the result in the json object or
             //return a status of 500 with the error.
@@ -86,7 +87,8 @@ exports.login_user = (req, res, next) =>{
           //by the secret key fromt he env variables and the expiration.
           const token = jwt.sign({
             email: user[0].email,
-            userId: user[0]._id
+            userId: user[0]._id,
+            userAuth: user[0].auth
           }, process.env.JWT_KEY,
 
             {
