@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "http://localhost:3000/users/";
+const API_URL = "http://localhost:3001/users/";
 
 
 const register = (email, password) => {
