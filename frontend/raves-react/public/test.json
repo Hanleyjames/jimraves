@@ -1,0 +1,95 @@
+{
+    "items": [
+      {
+        "id": "tt6334354",
+        "rank": "1",
+        "title": "The Suicide Squad",
+        "image": "https://m.media-amazon.com/images/M/MV5BNGM3YzdlOWYtNjViZS00MTE2LWE1MWUtZmE2ZTcxZjcyMmU3XkEyXkFqcGdeQXVyODEyMTI1MjA@._V1_UX128_CR0,3,128,176_AL_.jpg",
+        "weekend": "$26.2M",
+        "gross": "$26.2M",
+        "weeks": "1"
+      },
+      {
+        "id": "tt0870154",
+        "rank": "2",
+        "title": "Jungle Cruise",
+        "image": "https://m.media-amazon.com/images/M/MV5BNDE1MGRlNTQtZjc4ZC00MTI0LWEwY2MtODk1YTM2NmFmYTNmXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_UX128_CR0,3,128,176_AL_.jpg",
+        "weekend": "$15.8M",
+        "gross": "$65.4M",
+        "weeks": "2"
+      },
+      {
+        "id": "tt10954652",
+        "rank": "3",
+        "title": "Old",
+        "image": "https://m.media-amazon.com/images/M/MV5BZGMxYmI2MDAtMjZlMC00YjQyLTljNGYtOGI0YmMwOGE3YWNiXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_UX128_CR0,3,128,176_AL_.jpg",
+        "weekend": "$4.1M",
+        "gross": "$38.5M",
+        "weeks": "3"
+      },
+      {
+        "id": "tt3480822",
+        "rank": "4",
+        "title": "Black Widow",
+        "image": "https://m.media-amazon.com/images/M/MV5BNjRmNDI5MjMtMmFhZi00YzcwLWI4ZGItMGI2MjI0N2Q3YmIwXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_UX128_CR0,3,128,176_AL_.jpg",
+        "weekend": "$3.9M",
+        "gross": "$174.3M",
+        "weeks": "5"
+      },
+      {
+        "id": "tt10696896",
+        "rank": "5",
+        "title": "Stillwater",
+        "image": "https://m.media-amazon.com/images/M/MV5BN2IzMTUyMDUtZGJmZC00YWMzLWFhMGMtZjQwMTkzMzViMjFkXkEyXkFqcGdeQXVyMTEyMjM2NDc2._V1_UX128_CR0,3,128,176_AL_.jpg",
+        "weekend": "$2.8M",
+        "gross": "$10.0M",
+        "weeks": "2"
+      },
+      {
+        "id": "tt9243804",
+        "rank": "6",
+        "title": "The Green Knight",
+        "image": "https://m.media-amazon.com/images/M/MV5BMjMxNTdiNWMtOWY0My00MjM4LTkwNzMtOGI0YThhN2Q4M2I4XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_UX128_CR0,3,128,176_AL_.jpg",
+        "weekend": "$2.6M",
+        "gross": "$12.2M",
+        "weeks": "2"
+      },
+      {
+        "id": "tt3554046",
+        "rank": "7",
+        "title": "Space Jam: A New Legacy",
+        "image": "https://m.media-amazon.com/images/M/MV5BZTAzN2ZlZTEtOTA5ZS00MGFjLTliYWMtYTQzYTFlYTIwZDVmXkEyXkFqcGdeQXVyNjY1MTg4Mzc@._V1_UX128_CR0,3,128,176_AL_.jpg",
+        "weekend": "$2.4M",
+        "gross": "$65.6M",
+        "weeks": "4"
+      },
+      {
+        "id": "tt8404256",
+        "rank": "8",
+        "title": "Snake Eyes: G.I. Joe Origins",
+        "image": "https://m.media-amazon.com/images/M/MV5BNGJmMWUwMDgtYjEyNS00YmZhLTk3ZGEtZDliZDBhMDJkMGUyXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_UY176_CR6,0,128,176_AL_.jpg",
+        "weekend": "$1.7M",
+        "gross": "$26.1M",
+        "weeks": "3"
+      },
+      {
+        "id": "tt9844522",
+        "rank": "9",
+        "title": "Escape Room: Tournament of Champions",
+        "image": "https://m.media-amazon.com/images/M/MV5BMzUxNGIyY2MtNDUxZC00YWY1LTg0MzctM2ExNTNmODlhMTRlXkEyXkFqcGdeQXVyMTE4Nzk0MzE4._V1_UY176_CR6,0,128,176_AL_.jpg",
+        "weekend": "$1.3M",
+        "gross": "$23.1M",
+        "weeks": "4"
+      },
+      {
+        "id": "tt5433138",
+        "rank": "10",
+        "title": "F9",
+        "image": "https://m.media-amazon.com/images/M/MV5BMjI0NmFkYzEtNzU2YS00NTg5LWIwYmMtNmQ1MTU0OGJjOTMxXkEyXkFqcGdeQXVyMjMxOTE0ODA@._V1_UX128_CR0,3,128,176_AL_.jpg",
+        "weekend": "$1.2M",
+        "gross": "$171.0M",
+        "weeks": "7"
+      }
+    ],
+    "errorMessage": ""
+  }
